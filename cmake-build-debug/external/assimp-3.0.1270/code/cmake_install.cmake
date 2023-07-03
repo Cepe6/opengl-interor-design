@@ -1,8 +1,8 @@
-# Install script for directory: C:/Users/vmlad/Projects/opengl-interor-design/external/assimp-3.0.1270/code
+# Install script for directory: /Users/v.mladenov/IdeaProjects/opengl-interor-design/external/assimp-3.0.1270/code
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/Tutorials")
+  set(CMAKE_INSTALL_PREFIX "/usr/local")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -34,11 +34,15 @@ endif()
 
 # Set default install directory permissions.
 if(NOT DEFINED CMAKE_OBJDUMP)
-  set(CMAKE_OBJDUMP "C:/Program Files/JetBrains/CLion 2023.1.4/bin/mingw/bin/objdump.exe")
+  set(CMAKE_OBJDUMP "/Library/Developer/CommandLineTools/usr/bin/objdump")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "libassimp3.0-r1270-OGLtuts" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "C:/Users/vmlad/Projects/opengl-interor-design/cmake-build-debug/external/assimp-3.0.1270/code/libassimp.a")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "/Users/v.mladenov/IdeaProjects/opengl-interor-design/cmake-build-debug/external/assimp-3.0.1270/code/libassimp.a")
+  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libassimp.a" AND
+     NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libassimp.a")
+    execute_process(COMMAND "/Library/Developer/CommandLineTools/usr/bin/ranlib" "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libassimp.a")
+  endif()
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
@@ -51,45 +55,45 @@ if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   file(INSTALL DESTINATION "/assimp" TYPE FILE FILES
-    "C:/Users/vmlad/Projects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/anim.h"
-    "C:/Users/vmlad/Projects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/ai_assert.h"
-    "C:/Users/vmlad/Projects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/camera.h"
-    "C:/Users/vmlad/Projects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/color4.h"
-    "C:/Users/vmlad/Projects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/color4.inl"
-    "C:/Users/vmlad/Projects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/config.h"
-    "C:/Users/vmlad/Projects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/defs.h"
-    "C:/Users/vmlad/Projects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/cfileio.h"
-    "C:/Users/vmlad/Projects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/light.h"
-    "C:/Users/vmlad/Projects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/material.h"
-    "C:/Users/vmlad/Projects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/material.inl"
-    "C:/Users/vmlad/Projects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/matrix3x3.h"
-    "C:/Users/vmlad/Projects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/matrix3x3.inl"
-    "C:/Users/vmlad/Projects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/matrix4x4.h"
-    "C:/Users/vmlad/Projects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/matrix4x4.inl"
-    "C:/Users/vmlad/Projects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/mesh.h"
-    "C:/Users/vmlad/Projects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/postprocess.h"
-    "C:/Users/vmlad/Projects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/quaternion.h"
-    "C:/Users/vmlad/Projects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/quaternion.inl"
-    "C:/Users/vmlad/Projects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/scene.h"
-    "C:/Users/vmlad/Projects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/texture.h"
-    "C:/Users/vmlad/Projects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/types.h"
-    "C:/Users/vmlad/Projects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/vector2.h"
-    "C:/Users/vmlad/Projects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/vector2.inl"
-    "C:/Users/vmlad/Projects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/vector3.h"
-    "C:/Users/vmlad/Projects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/vector3.inl"
-    "C:/Users/vmlad/Projects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/version.h"
-    "C:/Users/vmlad/Projects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/cimport.h"
-    "C:/Users/vmlad/Projects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/importerdesc.h"
-    "C:/Users/vmlad/Projects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/Importer.hpp"
-    "C:/Users/vmlad/Projects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/DefaultLogger.hpp"
-    "C:/Users/vmlad/Projects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/ProgressHandler.hpp"
-    "C:/Users/vmlad/Projects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/IOStream.hpp"
-    "C:/Users/vmlad/Projects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/IOSystem.hpp"
-    "C:/Users/vmlad/Projects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/Logger.hpp"
-    "C:/Users/vmlad/Projects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/LogStream.hpp"
-    "C:/Users/vmlad/Projects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/NullLogger.hpp"
-    "C:/Users/vmlad/Projects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/cexport.h"
-    "C:/Users/vmlad/Projects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/Exporter.hpp"
+    "/Users/v.mladenov/IdeaProjects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/anim.h"
+    "/Users/v.mladenov/IdeaProjects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/ai_assert.h"
+    "/Users/v.mladenov/IdeaProjects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/camera.h"
+    "/Users/v.mladenov/IdeaProjects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/color4.h"
+    "/Users/v.mladenov/IdeaProjects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/color4.inl"
+    "/Users/v.mladenov/IdeaProjects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/config.h"
+    "/Users/v.mladenov/IdeaProjects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/defs.h"
+    "/Users/v.mladenov/IdeaProjects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/cfileio.h"
+    "/Users/v.mladenov/IdeaProjects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/light.h"
+    "/Users/v.mladenov/IdeaProjects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/material.h"
+    "/Users/v.mladenov/IdeaProjects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/material.inl"
+    "/Users/v.mladenov/IdeaProjects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/matrix3x3.h"
+    "/Users/v.mladenov/IdeaProjects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/matrix3x3.inl"
+    "/Users/v.mladenov/IdeaProjects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/matrix4x4.h"
+    "/Users/v.mladenov/IdeaProjects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/matrix4x4.inl"
+    "/Users/v.mladenov/IdeaProjects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/mesh.h"
+    "/Users/v.mladenov/IdeaProjects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/postprocess.h"
+    "/Users/v.mladenov/IdeaProjects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/quaternion.h"
+    "/Users/v.mladenov/IdeaProjects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/quaternion.inl"
+    "/Users/v.mladenov/IdeaProjects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/scene.h"
+    "/Users/v.mladenov/IdeaProjects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/texture.h"
+    "/Users/v.mladenov/IdeaProjects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/types.h"
+    "/Users/v.mladenov/IdeaProjects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/vector2.h"
+    "/Users/v.mladenov/IdeaProjects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/vector2.inl"
+    "/Users/v.mladenov/IdeaProjects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/vector3.h"
+    "/Users/v.mladenov/IdeaProjects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/vector3.inl"
+    "/Users/v.mladenov/IdeaProjects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/version.h"
+    "/Users/v.mladenov/IdeaProjects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/cimport.h"
+    "/Users/v.mladenov/IdeaProjects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/importerdesc.h"
+    "/Users/v.mladenov/IdeaProjects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/Importer.hpp"
+    "/Users/v.mladenov/IdeaProjects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/DefaultLogger.hpp"
+    "/Users/v.mladenov/IdeaProjects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/ProgressHandler.hpp"
+    "/Users/v.mladenov/IdeaProjects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/IOStream.hpp"
+    "/Users/v.mladenov/IdeaProjects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/IOSystem.hpp"
+    "/Users/v.mladenov/IdeaProjects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/Logger.hpp"
+    "/Users/v.mladenov/IdeaProjects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/LogStream.hpp"
+    "/Users/v.mladenov/IdeaProjects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/NullLogger.hpp"
+    "/Users/v.mladenov/IdeaProjects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/cexport.h"
+    "/Users/v.mladenov/IdeaProjects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/Exporter.hpp"
     )
 endif()
 
@@ -103,9 +107,9 @@ if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   file(INSTALL DESTINATION "/assimp/Compiler" TYPE FILE FILES
-    "C:/Users/vmlad/Projects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/Compiler/pushpack1.h"
-    "C:/Users/vmlad/Projects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/Compiler/poppack1.h"
-    "C:/Users/vmlad/Projects/opengl-interor-design/external/assimp-3.0.1270/code/pstdint.h"
+    "/Users/v.mladenov/IdeaProjects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/Compiler/pushpack1.h"
+    "/Users/v.mladenov/IdeaProjects/opengl-interor-design/external/assimp-3.0.1270/code/../include/assimp/Compiler/poppack1.h"
+    "/Users/v.mladenov/IdeaProjects/opengl-interor-design/external/assimp-3.0.1270/code/pstdint.h"
     )
 endif()
 

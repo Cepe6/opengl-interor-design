@@ -37,9 +37,9 @@
 // Define this to 1 if building GLFW for X11
 /* #undef _GLFW_X11 */
 // Define this to 1 if building GLFW for Win32
-#define _GLFW_WIN32
+/* #undef _GLFW_WIN32 */
 // Define this to 1 if building GLFW for Cocoa
-/* #undef _GLFW_COCOA */
+#define _GLFW_COCOA
 // Define this to 1 if building GLFW for Wayland
 /* #undef _GLFW_WAYLAND */
 // Define this to 1 if building GLFW for Mir
@@ -50,9 +50,9 @@
 // Define this to 1 if building GLFW for GLX
 /* #undef _GLFW_GLX */
 // Define this to 1 if building GLFW for WGL
-#define _GLFW_WGL
+/* #undef _GLFW_WGL */
 // Define this to 1 if building GLFW for NSGL
-/* #undef _GLFW_NSGL */
+#define _GLFW_NSGL
 
 // Define this to 1 if building as a shared library / dynamic library / DLL
 /* #undef _GLFW_BUILD_DLL */
@@ -66,11 +66,11 @@
 /* #undef _GLFW_HAS_XF86VM */
 
 // Define this to 1 if glfwInit should change the current directory
-/* #undef _GLFW_USE_CHDIR */
+#define _GLFW_USE_CHDIR
 // Define this to 1 if glfwCreateWindow should populate the menu bar
-/* #undef _GLFW_USE_MENUBAR */
+#define _GLFW_USE_MENUBAR
 // Define this to 1 if windows should use full resolution on Retina displays
-/* #undef _GLFW_USE_RETINA */
+#define _GLFW_USE_RETINA
 
 // Define this to 1 if using OpenGL as the client library
 #define _GLFW_USE_OPENGL
