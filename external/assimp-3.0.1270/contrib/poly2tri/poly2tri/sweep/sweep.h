@@ -33,7 +33,7 @@
  * Zalik, B.(2008)'Sweep-line algorithm for constrained Delaunay triangulation',
  * International Journal of Geographical Information Science
  *
- * "FlipScan" Constrained Edge Algorithm invented by Thomas Åhlén, thahlen@gmail.com
+ * "FlipScan" Constrained Edge Algorithm invented by Thomas ï¿½hlï¿½n, thahlen@gmail.com
  */
 
 #ifndef SWEEP_H
@@ -161,7 +161,7 @@ private:
   void RotateTrianglePair(Triangle& t, Point& p, Triangle& ot, Point& op);
 
   /**
-   * Fills holes in the Advancing Front
+   * Fills holes in the Advancing front
    *
    *
    * @param tcx
@@ -182,7 +182,7 @@ private:
   double BasinAngle(Node& node);
 
   /**
-   * Fills a basin that has formed on the Advancing Front to the right
+   * Fills a basin that has formed on the Advancing front to the right
    * of given node.<br>
    * First we decide a left,bottom and right node that forms the
    * boundaries of the basin. Then we do a reqursive fill.

@@ -162,7 +162,7 @@ struct Field
 	size_t size;
 	size_t offset;
 
-	/** Size of each array dimension. For flat arrays,
+	/** size of each array dimension. For flat arrays,
 	 *  the second dimension is set to 1. */
 	size_t array_sizes[2];
 

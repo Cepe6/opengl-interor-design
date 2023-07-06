@@ -155,7 +155,7 @@ public:
 
 	//! Sets pointer to new array, using this as new workspace.
 	//! \param newPointer: Pointer to new array of elements.
-	//! \param size: Size of the new array.
+	//! \param size: size of the new array.
 	void set_pointer(T* newPointer, u32 size)
 	{
 		delete [] data;
@@ -265,7 +265,7 @@ public:
 
 
 	//! Returns size of used array.
-	//! \return Size of elements in the array.
+	//! \return size of elements in the array.
 	u32 size() const
 	{
 		return used;

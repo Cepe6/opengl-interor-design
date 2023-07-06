@@ -350,7 +350,7 @@ struct aiString
 	 *  the number of bytes from the beginning of the string to its end.*/
 	size_t length;
 
-	/** String buffer. Size limit is MAXLEN */
+	/** String buffer. size limit is MAXLEN */
 	char data[MAXLEN];
 } ;  // !struct aiString
 

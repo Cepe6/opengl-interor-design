@@ -272,8 +272,8 @@ public:
 
 
 	/** @brief Set the matrix from euler angles using YPR around YXZ respectively
-	*  @param yaw Yaw about Y axis
-	*  @param pitch Pitch about X axis
+	*  @param yaw yaw about Y axis
+	*  @param pitch pitch about X axis
 	*  @param roll Roll about Z axis 
 	*/
 	void setEulerYPR(const btScalar& yaw, const btScalar& pitch, const btScalar& roll) 
@@ -283,8 +283,8 @@ public:
 
 	/** @brief Set the matrix from euler angles YPR around ZYX axes
 	* @param eulerX Roll about X axis
-	* @param eulerY Pitch around Y axis
-	* @param eulerZ Yaw aboud Z axis
+	* @param eulerY pitch around Y axis
+	* @param eulerZ yaw aboud Z axis
 	* 
 	* These angles are used to produce a rotation matrix. The euler
 	* angles are applied in ZYX order. I.e a vector is first rotated 
@@ -481,8 +481,8 @@ public:
 	}
 
 	/**@brief Get the matrix represented as euler angles around YXZ, roundtrip with setEulerYPR
-	* @param yaw Yaw around Y axis
-	* @param pitch Pitch around X axis
+	* @param yaw yaw around Y axis
+	* @param pitch pitch around X axis
 	* @param roll around Z axis */	
 	void getEulerYPR(btScalar& yaw, btScalar& pitch, btScalar& roll) const
 	{
@@ -509,8 +509,8 @@ public:
 
 
 	/**@brief Get the matrix represented as euler angles around ZYX
-	* @param yaw Yaw around X axis
-	* @param pitch Pitch around Y axis
+	* @param yaw yaw around X axis
+	* @param pitch pitch around Y axis
 	* @param roll around X axis 
 	* @param solution_number Which solution of two possible solutions ( 1 or 2) are possible values*/	
 	void getEulerZYX(btScalar& yaw, btScalar& pitch, btScalar& roll, unsigned int solution_number = 1) const

@@ -1196,7 +1196,7 @@ void IRRImporter::InternReadFile( const std::string& pFile,
 								// radius of the sphere to be generated -
 								// or alternatively, size of the cube
 								else if ((Node::SPHERE == curNode->type && prop.name == "Radius") 
-									|| (Node::CUBE == curNode->type   && prop.name == "Size" ))	{
+									|| (Node::CUBE == curNode->type   && prop.name == "size" ))	{
 									
 										curNode->sphereRadius = prop.value;
 								}

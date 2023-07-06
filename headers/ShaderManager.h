@@ -10,17 +10,17 @@ class ShaderManager {
 private:
 	static std::vector<Shader*> shaders;
 public:
-	static void addShader(Shader* shader) {
+	static void add_shader(Shader* shader) {
 		shaders.push_back(shader);
 	}
 
-	static Shader* getShaderByName(std::string name) {
+	static Shader* get_shader_by_name(std::string name) {
 		for (Shader* shader : shaders) {
 			if (shader->name == name) {
 				return shader;
 			}
 		}
-		return NULL;
+		return nullptr;
 	}
 };
 #endif

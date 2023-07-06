@@ -172,39 +172,39 @@ private:
 
 	// -------------------------------------------------------------------
 	/** Load polygons from a POLS chunk
-	 *  @param length Size of the chunk
+	 *  @param length size of the chunk
 	*/
 	void LoadLWO2Polygons(unsigned int length);
 	void LoadLWOBPolygons(unsigned int length);
 
 	// -------------------------------------------------------------------
 	/** Load polygon tags from a PTAG chunk
-	 *  @param length Size of the chunk
+	 *  @param length size of the chunk
 	*/
 	void LoadLWO2PolygonTags(unsigned int length);
 
 	// -------------------------------------------------------------------
 	/** Load a vertex map from a VMAP/VMAD chunk
-	 *  @param length Size of the chunk
+	 *  @param length size of the chunk
 	 *  @param perPoly Operate on per-polygon base?
 	*/
 	void LoadLWO2VertexMap(unsigned int length, bool perPoly);
 
 	// -------------------------------------------------------------------
 	/** Load polygons from a PNTS chunk
-	 *  @param length Size of the chunk
+	 *  @param length size of the chunk
 	*/
 	void LoadLWOPoints(unsigned int length);
 
 	// -------------------------------------------------------------------
 	/** Load a clip from a CLIP chunk
-	 *  @param length Size of the chunk
+	 *  @param length size of the chunk
 	*/
 	void LoadLWO2Clip(unsigned int length);
 
 	// -------------------------------------------------------------------
 	/** Load an envelope from an EVL chunk
-	 *  @param length Size of the chunk
+	 *  @param length size of the chunk
 	*/
 	void LoadLWO2Envelope(unsigned int length);
 
@@ -379,7 +379,7 @@ protected:
 	/** file buffer */
 	uint8_t* mFileBuffer;
 
-	/** Size of the file, in bytes */
+	/** size of the file, in bytes */
 	unsigned int fileSize;
 
 	/** Output scene */

@@ -77,7 +77,7 @@ inline uint64_t GetMeshHash(aiMesh* in)
  *
  *  @param first First array
  *  @param second Second aray
- *  @param size Size of both arrays
+ *  @param size size of both arrays
  *  @param e Epsilon
  *  @return true if the arrays are identical
  */

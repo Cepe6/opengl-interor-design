@@ -81,7 +81,7 @@ struct sQ3BSPHeader
 struct sQ3BSPLump 
 {
 	int iOffset;	///< Offset from startpointer of file
-	int iSize;		///< Size fo part
+	int iSize;		///< size fo part
 };
 
 struct vec2f
@@ -116,7 +116,7 @@ struct sQ3BSPFace
 	int iNumOfFaceVerts;			///< Anzahl der Meshvertices
 	int iLightmapID;				///< Index to the lightmap array
 	int iLMapCorner[ 2 ];			///< Die Ecke der Lightmap in der Textur
-	int iLMapSize[ 2 ];				///< Size of the lightmap stored on the texture
+	int iLMapSize[ 2 ];				///< size of the lightmap stored on the texture
 	vec3f vLMapPos;					///< 3D-Ursprung der Lightmap
 	vec3f vLMapVecs[ 2 ];			///< 3D-s-t-Vektoren
 	vec3f vNormal;					///< Polygonnormale

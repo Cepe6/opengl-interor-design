@@ -179,7 +179,7 @@ struct Header_MDL7
 	//! Number of groups in file
 	uint32_t	groups_num;
 
-	//! Size of data in the file
+	//! size of data in the file
 	uint32_t	data_size;	
 
 	//! Ignored. Used to store entity specific information
@@ -188,35 +188,35 @@ struct Header_MDL7
 	//! Ignored. Used to store MED related data
 	int32_t	medlump_size;	
 
-	//! Size of the Bone_MDL7 data structure used in the file
+	//! size of the Bone_MDL7 data structure used in the file
 	uint16_t bone_stc_size;
 
-	//! Size of the Skin_MDL 7 data structure used in the file
+	//! size of the Skin_MDL 7 data structure used in the file
 	uint16_t skin_stc_size;
 
-	//! Size of a single color (e.g. in a material)
+	//! size of a single color (e.g. in a material)
 	uint16_t colorvalue_stc_size;
 
-	//! Size of the Material_MDL7 data structure used in the file
+	//! size of the Material_MDL7 data structure used in the file
 	uint16_t material_stc_size;
 
-	//! Size of a texture coordinate set in the file
+	//! size of a texture coordinate set in the file
 	uint16_t skinpoint_stc_size;
 
-	//! Size of a triangle in the file
+	//! size of a triangle in the file
 	uint16_t triangle_stc_size;
 
-	//! Size of a normal vertex in the file
+	//! size of a normal vertex in the file
 	uint16_t mainvertex_stc_size;
 
-	//! Size of a per-frame animated vertex in the file
+	//! size of a per-frame animated vertex in the file
 	//! (this is not supported)
 	uint16_t framevertex_stc_size;
 
-	//! Size of a bone animation matrix
+	//! size of a bone animation matrix
 	uint16_t bonetrans_stc_size;
 
-	//! Size of the Frame_MDL7 data structure used in the file
+	//! size of the Frame_MDL7 data structure used in the file
 	uint16_t frame_stc_size;
 } PACK_STRUCT;
 

@@ -100,7 +100,7 @@ protected:
 	/** Buffer to hold the loaded file */
 	const char* mBuffer;
 
-	/** Size of the file, in bytes */
+	/** size of the file, in bytes */
 	unsigned int fileSize;
 
 	/** Output scene */

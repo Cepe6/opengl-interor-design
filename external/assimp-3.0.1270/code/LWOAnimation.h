@@ -251,7 +251,7 @@ protected:
 	 *  @param envl_y Y-component envelope
 	 *  @param envl_z Z-component envelope
 	 *  @param flags Any combination of the AI_LWO_ANIM_FLAG_XXX flags.
-	 *  @note Up to two input envelopes may be NULL
+	 *  @note up to two input envelopes may be NULL
 	 */
 	void GetKeys(std::vector<aiVectorKey>& out, 
 		LWO::Envelope* envl_x,

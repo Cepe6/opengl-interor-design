@@ -566,7 +566,7 @@ void AnimResolver::ExtractAnimChannel(aiNodeAnim** out, unsigned int flags /*= 0
 		anim->mRotationKeys = new aiQuatKey[ anim->mNumRotationKeys = keys.size() ];
 		
 		// convert heading, pitch, bank to quaternion
-		// mValue.x=Heading=Rot(Y), mValue.y=Pitch=Rot(X), mValue.z=Bank=Rot(Z)
+		// mValue.x=Heading=Rot(Y), mValue.y=pitch=Rot(X), mValue.z=Bank=Rot(Z)
 		// Lightwave's rotation order is ZXY
 		aiVector3D X(1.0,0.0,0.0);
 		aiVector3D Y(0.0,1.0,0.0);

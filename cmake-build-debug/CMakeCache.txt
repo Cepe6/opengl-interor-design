@@ -14,9 +14,6 @@
 # EXTERNAL cache entries
 ########################
 
-//Dependencies for the target
-ANTTWEAKBAR_116_OGLCORE_GLFW_LIB_DEPENDS:STATIC=general;/Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/System/Library/Frameworks/OpenGL.framework;general;/Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/System/Library/Frameworks/OpenGL.framework;general;/Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/System/Library/Frameworks/Cocoa.framework;general;/Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/System/Library/Frameworks/OpenGL.framework;general;/Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/System/Library/Frameworks/IOKit.framework;general;/Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/System/Library/Frameworks/CoreFoundation.framework;general;/Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/System/Library/Frameworks/CoreVideo.framework;
-
 //Build shared libraries
 BUILD_SHARED_LIBS:BOOL=OFF
 
@@ -152,7 +149,7 @@ CMAKE_PROJECT_DESCRIPTION:STATIC=
 CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=Tutorials
+CMAKE_PROJECT_NAME:STATIC=opengl_interor_design
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=/Library/Developer/CommandLineTools/usr/bin/ranlib
@@ -228,9 +225,6 @@ CORE_VIDEO_FRAMEWORK:FILEPATH=/Library/Developer/CommandLineTools/SDKs/MacOSX13.
 //Doxygen documentation generation tool (https://www.doxygen.nl)
 DOXYGEN_EXECUTABLE:FILEPATH=DOXYGEN_EXECUTABLE-NOTFOUND
 
-//Dependencies for the target
-GLEW_1130_LIB_DEPENDS:STATIC=general;/Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/System/Library/Frameworks/OpenGL.framework;general;/Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/System/Library/Frameworks/OpenGL.framework;general;/Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/System/Library/Frameworks/Cocoa.framework;general;/Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/System/Library/Frameworks/OpenGL.framework;general;/Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/System/Library/Frameworks/IOKit.framework;general;/Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/System/Library/Frameworks/CoreFoundation.framework;general;/Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/System/Library/Frameworks/CoreVideo.framework;
-
 //Value Computed by CMake
 GLFW_BINARY_DIR:STATIC=/Users/v.mladenov/IdeaProjects/opengl-interor-design/cmake-build-debug/external/glfw-3.1.2
 
@@ -298,8 +292,14 @@ Tutorials_SOURCE_DIR:STATIC=/Users/v.mladenov/IdeaProjects/opengl-interor-design
 //Fix for VC10 Compiler regarding pstdint.h redefinition errors
 VC10_STDINT_FIX:BOOL=OFF
 
-//Dependencies for the target
-assimp_LIB_DEPENDS:STATIC=general;zlib;
+//Value Computed by CMake
+opengl_interor_design_BINARY_DIR:STATIC=/Users/v.mladenov/IdeaProjects/opengl-interor-design/cmake-build-debug
+
+//Value Computed by CMake
+opengl_interor_design_IS_TOP_LEVEL:STATIC=ON
+
+//Value Computed by CMake
+opengl_interor_design_SOURCE_DIR:STATIC=/Users/v.mladenov/IdeaProjects/opengl-interor-design
 
 
 ########################

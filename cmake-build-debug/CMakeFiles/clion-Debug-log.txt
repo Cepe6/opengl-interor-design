@@ -1,17 +1,4 @@
 "/Users/v.mladenov/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/231.9011.31/CLion.app/Contents/bin/cmake/mac/bin/cmake" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=/Users/v.mladenov/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/231.9011.31/CLion.app/Contents/bin/ninja/mac/ninja" -G Ninja -S /Users/v.mladenov/IdeaProjects/opengl-interor-design -B /Users/v.mladenov/IdeaProjects/opengl-interor-design/cmake-build-debug
--- The C compiler identification is AppleClang 14.0.3.14030022
--- The CXX compiler identification is AppleClang 14.0.3.14030022
--- Detecting C compiler ABI info
--- Detecting C compiler ABI info - done
--- Check for working C compiler: /Library/Developer/CommandLineTools/usr/bin/cc - skipped
--- Detecting C compile features
--- Detecting C compile features - done
--- Detecting CXX compiler ABI info
--- Detecting CXX compiler ABI info - done
--- Check for working CXX compiler: /Library/Developer/CommandLineTools/usr/bin/c++ - skipped
--- Detecting CXX compile features
--- Detecting CXX compile features - done
--- Found OpenGL: /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/System/Library/Frameworks/OpenGL.framework   
 CMake Deprecation Warning at external/glfw-3.1.2/CMakeLists.txt:8 (cmake_policy):
   The OLD behavior for policy CMP0042 will be removed from a future version
   of CMake.
@@ -22,25 +9,10 @@ CMake Deprecation Warning at external/glfw-3.1.2/CMakeLists.txt:8 (cmake_policy)
   behavior and not rely on setting a policy to OLD.
 
 
--- Performing Test CMAKE_HAVE_LIBC_PTHREAD
--- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
--- Found Threads: TRUE  
 -- Could NOT find Doxygen (missing: DOXYGEN_EXECUTABLE) 
 -- Using Cocoa for window creation
 -- Using NSGL for context creation
 -- Building GLFW only for the native architecture
--- Looking for sys/types.h
--- Looking for sys/types.h - found
--- Looking for stdint.h
--- Looking for stdint.h - found
--- Looking for stddef.h
--- Looking for stddef.h - found
--- Check size of off64_t
--- Check size of off64_t - failed
--- Looking for fseeko
--- Looking for fseeko - found
--- Looking for unistd.h
--- Looking for unistd.h - found
 -- Configuring done
 -- Generating done
 -- Build files have been written to: /Users/v.mladenov/IdeaProjects/opengl-interor-design/cmake-build-debug

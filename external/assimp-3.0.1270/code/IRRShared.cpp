@@ -356,7 +356,7 @@ aiMaterial* IrrlichtBase::ParseMaterial(unsigned int& matFlags)
 						}
 					}
 
-					// Up to 4 texture channels are supported
+					// up to 4 texture channels are supported
 					if (prop.name == "Texture1")
 					{
 						// Always accept the primary texture channel

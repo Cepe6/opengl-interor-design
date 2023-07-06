@@ -1,7 +1,5 @@
 #include <iostream>
-#include <filesystem>
 
-#include <GL/glew.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <utility>
@@ -59,14 +57,18 @@ unsigned int lamp_indices[] = {
     1, 2, 3  // second triangle
 };
 
-Light::Light(std::string name, glm::vec3 scaleVec, glm::vec3 rotateVec, float rotateAngle, glm::vec3 translateVec,
+Light::Light(std::string name,
+             glm::vec3 scale_vec,
+             glm::vec3 rotate_vec,
+             float rotate_angle,
+             glm::vec3 translate_vec,
              const char* texture_name) {
-    this->scaleVec = scaleVec;
-    this->rotateVec = rotateVec;
-    this->rotateAngle = rotateAngle;
-    this->translateVec = translateVec;
+    this->scale_vec = scale_vec;
+    this->rotate_vec = rotate_vec;
+    this->rotate_angle = rotate_angle;
+    this->translate_vec = translate_vec;
     this->name = std::move(name);
-    this->shader = ShaderManager::getShaderByName("light");
+    this->shader = ShaderManager::get_shader_by_name("light");
     this->texture_name = texture_name;
 
     glGenVertexArrays(1, &VAO);
@@ -90,9 +92,9 @@ Light::Light(std::string name, glm::vec3 scaleVec, glm::vec3 rotateVec, float ro
     glm::mat4 projection = glm::mat4(1.0f);
     projection = glm::perspective(glm::radians(45.0f), 1280.0f / 720.0f, 0.1f, 100.0f);
 
-    PointLightManager::addPointLight(new PointLight({ true, translateVec, glm::vec3(5.05f, 5.05f, 5.05f),
-                                                      glm::vec3(0.8f, 0.8f, 0.8f),
-                                                      glm::vec3(1.0f), 1.0f, 0.35, 0.44 }));
+    PointLightManager::add_point_light(new PointLight({true, translate_vec, glm::vec3(5.05f, 5.05f, 5.05f),
+                                                       glm::vec3(0.8f, 0.8f, 0.8f),
+                                                       glm::vec3(1.0f), 1.0f, 0.35, 0.44}));
 
     shader->setMat4("projection", projection);
 }
@@ -104,13 +106,13 @@ void Light::draw() {
     glm::mat4 model = glm::mat4(1.0f);
 
     // Handle transformations
-    model = glm::translate(model, translateVec);
-    model = glm::rotate(model, glm::radians(rotateAngle), rotateVec);
-    model = glm::scale(model, scaleVec);
+    model = glm::translate(model, translate_vec);
+    model = glm::rotate(model, glm::radians(rotate_angle), rotate_vec);
+    model = glm::scale(model, scale_vec);
 
     // retrieve the matrix uniform locations
     // pass them to the shaders
-    shader->setMat4("view", Camera::instance->GetViewMatrix());
+    shader->setMat4("view", Camera::instance->get_view_matrix());
     shader->setMat4("model", model);
 
     glBindVertexArray(VAO);

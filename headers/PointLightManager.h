@@ -20,14 +20,14 @@ struct PointLight {
 
 class PointLightManager {
 private:
-	static std::vector<PointLight*> pointLights;
+	static std::vector<PointLight*> point_lights;
 public:
-	static void addPointLight(PointLight* pointLight) {
-		pointLights.push_back(pointLight);
+	static void add_point_light(PointLight* point_light) {
+		point_lights.push_back(point_light);
 	}
 
-	static std::vector<PointLight*> getPointLights() {
-		return pointLights;
+	static std::vector<PointLight*> get_point_lights() {
+		return point_lights;
 	}
 };
 

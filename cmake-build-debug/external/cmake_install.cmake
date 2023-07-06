@@ -38,14 +38,37 @@ if(NOT DEFINED CMAKE_OBJDUMP)
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  # Include the install script for each subdirectory.
+  # Include the install script for the subdirectory.
   include("/Users/v.mladenov/IdeaProjects/opengl-interor-design/cmake-build-debug/external/glfw-3.1.2/cmake_install.cmake")
-  include("/Users/v.mladenov/IdeaProjects/opengl-interor-design/cmake-build-debug/external/assimp-3.0.1270/contrib/zlib/cmake_install.cmake")
-  include("/Users/v.mladenov/IdeaProjects/opengl-interor-design/cmake-build-debug/external/assimp-3.0.1270/code/cmake_install.cmake")
-  include("/Users/v.mladenov/IdeaProjects/opengl-interor-design/cmake-build-debug/external/bullet-2.81-rev2613/src/BulletSoftBody/cmake_install.cmake")
-  include("/Users/v.mladenov/IdeaProjects/opengl-interor-design/cmake-build-debug/external/bullet-2.81-rev2613/src/BulletCollision/cmake_install.cmake")
-  include("/Users/v.mladenov/IdeaProjects/opengl-interor-design/cmake-build-debug/external/bullet-2.81-rev2613/src/BulletDynamics/cmake_install.cmake")
-  include("/Users/v.mladenov/IdeaProjects/opengl-interor-design/cmake-build-debug/external/bullet-2.81-rev2613/src/LinearMath/cmake_install.cmake")
+endif()
 
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/Users/v.mladenov/IdeaProjects/opengl-interor-design/cmake-build-debug/external/assimp-3.0.1270/contrib/zlib/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/Users/v.mladenov/IdeaProjects/opengl-interor-design/cmake-build-debug/external/assimp-3.0.1270/code/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/Users/v.mladenov/IdeaProjects/opengl-interor-design/cmake-build-debug/external/bullet-2.81-rev2613/src/BulletSoftBody/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/Users/v.mladenov/IdeaProjects/opengl-interor-design/cmake-build-debug/external/bullet-2.81-rev2613/src/BulletCollision/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/Users/v.mladenov/IdeaProjects/opengl-interor-design/cmake-build-debug/external/bullet-2.81-rev2613/src/BulletDynamics/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/Users/v.mladenov/IdeaProjects/opengl-interor-design/cmake-build-debug/external/bullet-2.81-rev2613/src/LinearMath/cmake_install.cmake")
 endif()
 

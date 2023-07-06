@@ -186,7 +186,7 @@ protected:
 	/** Used to load textures from MDL3/4
 	 * \param szData Input data
 	 * \param iType Color data type
-	 * \param piSkip Receive: Size to skip, in bytes
+	 * \param piSkip Receive: size to skip, in bytes
 	*/
 	void CreateTexture_3DGS_MDL4(const unsigned char* szData, 
 		unsigned int iType,
@@ -197,7 +197,7 @@ protected:
 	/** Used to load textures from MDL5
 	 * \param szData Input data
 	 * \param iType Color data type
-	 * \param piSkip Receive: Size to skip, in bytes
+	 * \param piSkip Receive: size to skip, in bytes
 	*/
 	void CreateTexture_3DGS_MDL5(const unsigned char* szData, 
 		unsigned int iType,
@@ -447,7 +447,7 @@ protected:
 	/** Output scene to be filled */
 	aiScene* pScene;
 
-	/** Size of the input file in bytes */
+	/** size of the input file in bytes */
 	unsigned int iFileSize;
 };
 

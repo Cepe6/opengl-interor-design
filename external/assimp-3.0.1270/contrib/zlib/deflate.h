@@ -214,7 +214,7 @@ typedef struct internal_state {
     uchf *l_buf;          /* buffer for literals or lengths */
 
     uInt  lit_bufsize;
-    /* Size of match buffer for literals/lengths.  There are 4 reasons for
+    /* size of match buffer for literals/lengths.  There are 4 reasons for
      * limiting lit_bufsize to 64K:
      *   - frequencies can be kept in 16 bit counters
      *   - if compression is not successful for the first block, all input

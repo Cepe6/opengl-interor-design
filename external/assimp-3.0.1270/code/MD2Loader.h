@@ -113,7 +113,7 @@ protected:
 	/** Buffer to hold the loaded file */
 	BE_NCONST uint8_t* mBuffer;
 
-	/** Size of the file, in bytes */
+	/** size of the file, in bytes */
 	unsigned int fileSize;
 };
 

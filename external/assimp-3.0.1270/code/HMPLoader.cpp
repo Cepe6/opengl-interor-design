@@ -185,7 +185,7 @@ void HMPImporter::ValidateHeader_HMP457( )
 	}
 
 	if (!pcHeader->ftrisize_x || !pcHeader->ftrisize_y)
-		throw DeadlyImportError("Size of triangles in either  x or y direction is zero");
+		throw DeadlyImportError("size of triangles in either  x or y direction is zero");
 	
 	if(pcHeader->fnumverts_x < 1.0f || (pcHeader->numverts/pcHeader->fnumverts_x) < 1.0f)
 		throw DeadlyImportError("Number of triangles in either x or y direction is zero");

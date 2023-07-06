@@ -1,6 +1,8 @@
 # CMake entry point
-cmake_minimum_required (VERSION 3.0)
-project (Tutorials)
+cmake_minimum_required(VERSION 3.25)
+project(opengl_interor_design)
+
+set(CMAKE_CXX_STANDARD 17)
 
 find_package(OpenGL REQUIRED)
 
@@ -48,7 +50,7 @@ add_definitions(
 )
 
 add_executable(opengl_interior
-	main.cpp
+	main.cpp external/glfw-3.1.2/deps/glad.c
         model/Camera.cpp model/Light.cpp model/Object.cpp model/PointLightManager.cpp model/ShaderManager.cpp model/stb_image.cpp)
 target_link_libraries(opengl_interior
 	${ALL_LIBS}

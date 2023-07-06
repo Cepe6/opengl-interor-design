@@ -1,10 +1,8 @@
 #include <iostream>
 #include <filesystem>
 
-#include <GL/glew.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
 #include "headers/Object.h"
 #include "headers/ShaderManager.h"
 #include "headers/Camera.h"
@@ -59,14 +57,14 @@ unsigned int obj_indices[] = {
     1, 2, 3  // second triangle
 };
 
-Object::Object(std::string name, glm::vec3 scaleVec, glm::vec3 rotateVec, float rotateAngle, glm::vec3 translateVec,
+Object::Object(std::string name, glm::vec3 scale_vec, glm::vec3 rotate_vec, float rotate_angle, glm::vec3 translate_vec,
                const char* texture_name) {
-    this->scaleVec = scaleVec;
-    this->rotateVec = rotateVec;
-    this->rotateAngle = rotateAngle;
-    this->translateVec = translateVec;
+    this->scale_vec = scale_vec;
+    this->rotate_vec = rotate_vec;
+    this->rotate_angle = rotate_angle;
+    this->translate_vec = translate_vec;
     this->name = name;
-    this->shader = ShaderManager::getShaderByName("texture");
+    this->shader = ShaderManager::get_shader_by_name("texture");
     this->texture_name = texture_name;
 
     glGenVertexArrays(1, &VAO);
@@ -87,7 +85,7 @@ Object::Object(std::string name, glm::vec3 scaleVec, glm::vec3 rotateVec, float 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
 
-    loadTexture();
+    load_texture();
     shader->use();
     glm::mat4 projection = glm::mat4(1.0f);
     projection = glm::perspective(glm::radians(45.0f), 1280.0f / 720.0f, 0.1f, 100.0f);
@@ -102,16 +100,16 @@ void Object::draw() {
 
     glm::mat4 model = glm::mat4(1.0f);
 
-    model = glm::translate(model, translateVec);
-    model = glm::rotate(model, glm::radians(rotateAngle), rotateVec);
-    model = glm::scale(model, scaleVec);
+    model = glm::translate(model, translate_vec);
+    model = glm::rotate(model, glm::radians(rotate_angle), rotate_vec);
+    model = glm::scale(model, scale_vec);
 
     light();
 
-    shader->setMat4("view", Camera::instance->GetViewMatrix());
+    shader->setMat4("view", Camera::instance->get_view_matrix());
     shader->setMat4("model", model);
 
-    if (Camera::instance->CheckCollision(this)) {
+    if (Camera::instance->check_collision(this)) {
         Camera::instance->colliding = this;
     }
 
@@ -134,22 +132,22 @@ void Object::light() {
     shader->setInt("material.diffuse", 0);
     shader->setFloat("material.shininess", 32.0f);
 
-    std::vector<PointLight*> lights = PointLightManager::getPointLights();
+    std::vector<PointLight*> lights = PointLightManager::get_point_lights();
     shader->setInt("pointLightsCount", static_cast<int>(lights.size()));
 
     for (int i = 0; i < lights.size(); i++) {
-        shader->setInt("pointLights[" + std::to_string(i) + "].on", lights[i]->on);
-        shader->setVec3("pointLights[" + std::to_string(i) + "].position", lights[i]->position);
-        shader->setVec3("pointLights[" + std::to_string(i) + "].ambient", lights[i]->ambient);
-        shader->setVec3("pointLights[" + std::to_string(i) + "].diffuse", lights[i]->diffuse);
-        shader->setVec3("pointLights[" + std::to_string(i) + "].specular", lights[i]->specular);
-        shader->setFloat("pointLights[" + std::to_string(i) + "].constant", lights[i]->constant);
-        shader->setFloat("pointLights[" + std::to_string(i) + "].linear", lights[i]->linear);
-        shader->setFloat("pointLights[" + std::to_string(i) + "].quadratic", lights[i]->quadratic);
+        shader->setInt("point_lights[" + std::to_string(i) + "].on", lights[i]->on);
+        shader->setVec3("point_lights[" + std::to_string(i) + "].position", lights[i]->position);
+        shader->setVec3("point_lights[" + std::to_string(i) + "].ambient", lights[i]->ambient);
+        shader->setVec3("point_lights[" + std::to_string(i) + "].diffuse", lights[i]->diffuse);
+        shader->setVec3("point_lights[" + std::to_string(i) + "].specular", lights[i]->specular);
+        shader->setFloat("point_lights[" + std::to_string(i) + "].constant", lights[i]->constant);
+        shader->setFloat("point_lights[" + std::to_string(i) + "].linear", lights[i]->linear);
+        shader->setFloat("point_lights[" + std::to_string(i) + "].quadratic", lights[i]->quadratic);
     }
 }
 
-void Object::loadTexture() {
+void Object::load_texture() {
     glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D, texture);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);

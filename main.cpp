@@ -1,10 +1,12 @@
 #include <iostream>
 #include <vector>
-#include "external/glfw-3.1.2/deps/glad/glad.h"
+
 #include "headers/Camera.h"
 #include "headers/Light.h"
 #include "headers/ShaderManager.h"
 #include "headers/PointLightManager.h"
+
+#include <GLFW/glfw3.h>
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -14,44 +16,38 @@ const int SCREEN_HEIGHT = 720;
 
 // camera
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
-float lastX = SCREEN_WIDTH / 2.0f;
-float lastY = SCREEN_HEIGHT / 2.0f;
-bool firstMouse = true;
+float last_x = SCREEN_WIDTH / 2.0f;
+float last_y = SCREEN_HEIGHT / 2.0f;
+bool first_mouse = true;
 
 
-float deltaTime = 0.0f;	// Time between current frame and last frame
-float lastFrame = 0.0f; // Time of last frame
-
-glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
-glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
-glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
+float delta_time = 0.0f; // Time between current frame and last frame
+float last_frame = 0.0f;  // Time of last frame
 
 std::vector<Object*> room_objects = {};
 std::vector<Light*> light_objects = {};
 
 GLFWwindow* window;
 
-bool lightStatus = false;
-
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 
 int init();
-void renderLoop();
-void loadShaders();
-void loadObjects();
-void processInput();
-void calculateDeltaTime();
+void render_loop();
+void load_shaders();
+void load_objects();
+void process_input();
+void calculate_delta_time();
 
 int main() {
     if (init() == -1) {
         return -1;
     }
 
-    loadShaders();
-    loadObjects();
-    renderLoop();
+    load_shaders();
+    load_objects();
+    render_loop();
 
     glfwTerminate();
     return 0;
@@ -62,13 +58,15 @@ int init() {
 
     // glfw: initialize and configure
     glfwInit();
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_SAMPLES, 4); // 4x antialiasing
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); // We want OpenGL 3.3
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // To make MacOS happy; should not be needed
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); // We don't want the old OpenGL
 
     // glfw window creation
-    window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Room", NULL, NULL);
-    if (window == NULL)
+    window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Room", nullptr, nullptr);
+    if (window == nullptr)
     {
         std::cout << "Failed to create GLFW window" << std::endl;
         glfwTerminate();
@@ -82,39 +80,39 @@ int init() {
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);//
 
     // glad: load all OpenGL function pointers
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+    if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress))
     {
         std::cout << "Failed to initialize GLAD" << std::endl;
         return -1;
     }
-    glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+
+    glViewport(0, 0, SCREEN_WIDTH * 2, SCREEN_HEIGHT * 2);
     glEnable(GL_DEPTH_TEST);
 
     return 0;
 }
 
-void renderLoop() {
+void render_loop() {
     while (!glfwWindowShouldClose(window))
     {
-        calculateDeltaTime();
-
-        processInput();
+        calculate_delta_time();
+        process_input();
 
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.1f, 100.0f);
-        ShaderManager::getShaderByName("texture")->setMat4("projection", projection);
+        glm::mat4 projection = glm::perspective(glm::radians(camera.zoom), (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.1f, 100.0f);
+        ShaderManager::get_shader_by_name("texture")->setMat4("projection", projection);
 
-        glm::mat4 view = camera.GetViewMatrix();
-        ShaderManager::getShaderByName("texture")->setMat4("view", view);
+        glm::mat4 view = camera.get_view_matrix();
+        ShaderManager::get_shader_by_name("texture")->setMat4("view", view);
 
-        for (Object* gameObject : room_objects) {
-            gameObject->draw();
+        for (Object* room_object : room_objects) {
+            room_object->draw();
         }
 
-        for (Light* gameObject : light_objects) {
-            gameObject->draw();
+        for (Light* light_object : light_objects) {
+            light_object->draw();
         }
 
         glfwSwapBuffers(window); // will swap the color buffer (a large 2D buffer that contains color values for each pixel in GLFW's window)
@@ -122,68 +120,108 @@ void renderLoop() {
     }
 }
 
-void processInput() {
+void process_input() {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
 
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-        camera.ProcessKeyboard(FORWARD, deltaTime);
+        camera.on_keyboard_input(FORWARD, delta_time, glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS);
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-        camera.ProcessKeyboard(BACKWARD, deltaTime);
+        camera.on_keyboard_input(BACKWARD, delta_time, glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS);
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-        camera.ProcessKeyboard(LEFT, deltaTime);
+        camera.on_keyboard_input(LEFT, delta_time, glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS);
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-        camera.ProcessKeyboard(RIGHT, deltaTime);
+        camera.on_keyboard_input(RIGHT, delta_time, glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS);
 
-    if (glfwGetKey(window, GLFW_KEY_L) == GLFW_PRESS) {
-        PointLight* light = PointLightManager::getPointLights()[1];
+    if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
+        PointLight* light = PointLightManager::get_point_lights()[1];
         light->on = !light->on;
     }
 }
 
-void loadObjects() {
-    Object* obj = new Object("cube1", glm::vec3(1.2f, 1.2f, 1.2f), glm::vec3(0.0f, 0.1f, 0.0f),
-                             0.0f, glm::vec3(0.0f) + glm::vec3(0.0f, -1.8f, 0.0f), "./container-space.jpg");
+void load_objects() {
+    auto* red_chair = new Object("cube1",
+                                 glm::vec3(1.2f, 1.2f, 1.2f),
+                                 glm::vec3(0.0f, 0.1f, 0.0f),
+                                 0.0f,
+                                 glm::vec3(0.0f) + glm::vec3(-6.0f, -1.8f, -6.0f),
+                                 "../resources/chair-red-leather.jpg");
 
-    Object* obj2 = new Object("cube2", glm::vec3(1.2f, 1.2f, 1.2f), glm::vec3(0.0f, 0.1f, 0.0f),
-                              0.0f, glm::vec3(0.0f) + glm::vec3(1.4f, -1.8f, 0.0f), "./container-space.jpg");
+    auto* brown_chair = new Object("cube2",
+                                   glm::vec3(1.2f, 1.2f, 1.2f),
+                                   glm::vec3(0.0f, 0.1f, 0.0f),
+                                   0.0f,
+                                   glm::vec3(0.0f) + glm::vec3(3.0f, -1.8f, 1.0f),
+                                   "../resources/chair-brown-leather.jpg");
 
-    Object* obj3 = new Object("cube3", glm::vec3(1.2f, 1.2f, 1.2f), glm::vec3(0.0f, 0.1f, 0.0f),
-                              0.0f, glm::vec3(0.0f) + glm::vec3(1.0f, -0.6f, 0.0f), "./container-space.jpg");
+    auto* black_chair = new Object("cube3",
+                                   glm::vec3(1.2f, 1.2f, 1.2f),
+                                   glm::vec3(0.0f, 0.1f, 0.0f),
+                                   0.0f,
+                                   glm::vec3(0.0f) + glm::vec3(3.0f, -1.8f, -1.0f),
+                                   "../resources/chair-black-leather.jpg");
 
-    Object* panel = new Object("panel", glm::vec3(1.2f, 2.2f, 3.2f), glm::vec3(0.0f, 0.1f, 0.0f),
-                               0.0f, glm::vec3(0.0f) + glm::vec3(7.0f, -1.4f, 0.0f), "./panel.jpg");
+    auto* screen = new Object("screen",
+                              glm::vec3(0.01f, 3.2f, 1.6f),
+                              glm::vec3(90.0f, 0.1f, 0.0f),
+                              90.0f,
+                              glm::vec3(0.0f) + glm::vec3(7.1f, 0.5f, 0.0f),
+                              "../resources/screen.jpg");
 
-    Object* screen = new Object("screen", glm::vec3(0.01f, 3.2f, 1.6f), glm::vec3(90.0f, 0.1f, 0.0f),
-                                90.0f, glm::vec3(0.0f) + glm::vec3(6.8f, 0.5f, 0.0f), "./screen.jpg");
+    auto* wall_window = new Object("window",
+                                   glm::vec3(2.0f, 2.0f, 0.1f),
+                                   glm::vec3(0.0f, 0.05f, 0.0f),
+                                   0.0f,
+                                   glm::vec3(0.0f) + glm::vec3(-3.0f, 0.6f, -7.15f),
+                                   "../resources/window.jpg");
 
-    Object* portret = new Object("portret", glm::vec3(1.4f, 1.4f, 0.1f), glm::vec3(0.0f, 0.05f, 0.0f),
-                                 0.0f, glm::vec3(0.0f) + glm::vec3(-3.0f, 0.6f, -7.15f), "./azis.jpg");
+    auto* floor = new Object("floor",
+                             glm::vec3(15.0f, 0.1f, 15.0f),
+                             glm::vec3(0.0f, 0.1f, 0.0f),
+                             0.0f,
+                             glm::vec3(0.0f) + glm::vec3(0.0f, -2.5f, 0.0f),
+                             "../resources/floor.jpg");
 
-    Object* floor = new Object("floor", glm::vec3(15.0f, 0.1f, 15.0f),
-                               glm::vec3(0.0f, 0.1f, 0.0f), 0.0f, glm::vec3(0.0f) + glm::vec3(0.0f, -2.5f, 0.0f), "./floor.jpg");
+    auto* wall1 = new Object("wall1",
+                             glm::vec3(0.75f, 15.0f, 7.0f),
+                             glm::vec3(90.0f, 0.1f, 0.0f),
+                             90.0f,
+                             glm::vec3(0.0f) + glm::vec3(-7.5f, 0.0f, 0.0f),
+                             "../resources/wood-wall.jpg");
 
-    Object* wall1 = new Object("wall1", glm::vec3(0.75f, 15.0f, 7.0f),
-                               glm::vec3(90.0f, 0.1f, 0.0f), 90.0f, glm::vec3(0.0f) + glm::vec3(-7.5f, 0.0f, 0.0f), "./wall.jpg");
+    auto* wall2 = new Object("wall2",
+                             glm::vec3(15.0f, 7.0f, 0.75f),
+                             glm::vec3(0.0f, 1.0f, 0.0f),
+                             0.0f,
+                             glm::vec3(0.0f) + glm::vec3(0.0f, 0.0f, -7.5f),
+                             "../resources/wood-wall.jpg");
 
-    Object* wall2 = new Object("wall2", glm::vec3(15.0f, 7.0f, 0.75f),
-                               glm::vec3(0.0f, 1.0f, 0.0f), 0.0f, glm::vec3(0.0f) + glm::vec3(0.0f, 0.0f, -7.5f), "./wall.jpg");
+    auto* wall3 = new Object("wall3",
+                             glm::vec3(15.0f, 7.0f, 0.75f),
+                             glm::vec3(0.0f, 1.0f, 0.0f),
+                             0.0f,
+                             glm::vec3(0.0f) + glm::vec3(0.0f, 0.0f, 7.5f),
+                             "../resources/wood-wall.jpg");
 
-    Object* wall3 = new Object("wall3", glm::vec3(15.0f, 7.0f, 0.75f),
-                               glm::vec3(0.0f, 1.0f, 0.0f), 0.0f, glm::vec3(0.0f) + glm::vec3(0.0f, 0.0f, 7.5f), "./wall.jpg");
+    auto* wall4 = new Object("wall4",
+                             glm::vec3(0.75f, 15.0f, 7.0f),
+                             glm::vec3(90.0f, 0.1f, 0.0f),
+                             90.0f,
+                             glm::vec3(0.0f) + glm::vec3(7.5f, 0.0f, 0.0f),
+                             "../resources/wood-wall.jpg");
 
-    Object* wall4 = new Object("wall4", glm::vec3(0.75f, 15.0f, 7.0f),
-                               glm::vec3(90.0f, 0.1f, 0.0f), 90.0f, glm::vec3(0.0f) + glm::vec3(7.5f, 0.0f, 0.0f), "./wall.jpg");
+    auto* ceiling = new Object("ceiling",
+                               glm::vec3(15.0f, 0.1f, 15.0f),
+                               glm::vec3(0.0f, 0.1f, 0.0f),
+                               0.0f,
+                               glm::vec3(0.0f) + glm::vec3(0.0f, 2.5f, 0.0f),
+                               "../resources/ceiling.jpg");
 
-    Object* ceiling = new Object("ceiling", glm::vec3(15.0f, 0.1f, 15.0f),
-                                 glm::vec3(0.0f, 0.1f, 0.0f), 0.0f, glm::vec3(0.0f) + glm::vec3(0.0f, 2.5f, 0.0f), "./ceiling.jpg");
+    room_objects.push_back(red_chair);
+    room_objects.push_back(black_chair);
+    room_objects.push_back(brown_chair);
 
-    room_objects.push_back(obj);
-    room_objects.push_back(obj2);
-    room_objects.push_back(obj3);
-
-    room_objects.push_back(portret);
-    room_objects.push_back(panel);
+    room_objects.push_back(wall_window);
     room_objects.push_back(screen);
 
     room_objects.push_back(floor);
@@ -193,27 +231,40 @@ void loadObjects() {
     room_objects.push_back(wall4);
     room_objects.push_back(ceiling);
 
-    Light* lamp = new Light("lamp", glm::vec3(0.2f, 0.2f, 0.2f), glm::vec3(0.0f, 0.1f, 0.0f),
-                            0.0f, glm::vec3(0.0f) + glm::vec3(-5.0f, 0.8f, 0.0f), "./ceiling.jpg");
+    auto* lamp = new Light("lamp",
+                           glm::vec3(0.2f, 0.2f, 0.2f),
+                           glm::vec3(0.0f, 0.1f, 0.0f),
+                           0.0f,
+                           glm::vec3(0.0f) + glm::vec3(-3.0f, 0.5f, -10.0f),
+                           "../resources/ceiling.jpg");
 
-    Light* lamp2 = new Light("lamp2", glm::vec3(0.2f, 0.2f, 0.2f), glm::vec3(0.0f, 0.1f, 0.0f),
-                             0.0f, glm::vec3(0.0f) + glm::vec3(5.0f, 0.8f, 0.0f), "./ceiling.jpg");
+    auto* lamp2 = new Light("lamp2",
+                            glm::vec3(0.2f, 0.2f, 0.2f),
+                            glm::vec3(0.0f, 0.1f, 0.0f),
+                            0.0f,
+                            glm::vec3(0.0f) + glm::vec3(10.0f, 0.8f, 0.0f),
+                            "../resources/ceiling.jpg");
 
     light_objects.push_back(lamp);
     light_objects.push_back(lamp2);
 }
 
-void calculateDeltaTime()
+void calculate_delta_time()
 {
-    float currentFrame = glfwGetTime();
-    deltaTime = currentFrame - lastFrame;
-    lastFrame = currentFrame;
+    auto currentFrame = (float) glfwGetTime();
+    delta_time = currentFrame - last_frame;
+    last_frame = currentFrame;
 }
 
-void loadShaders()
+void load_shaders()
 {
-    ShaderManager::addShader(new Shader("texture", "./texture_shader.vs", "./texture_shader.fs"));
-    ShaderManager::addShader(new Shader("light", "./texture_lightsource.vs", "./texture_lightsource.fs"));
+    ShaderManager::add_shader(new Shader("texture",
+                                         "../shaders/texture_shader.vs",
+                                         "../shaders/texture_shader.fs"));
+
+    ShaderManager::add_shader(new Shader("light",
+                                         "../shaders/texture_lightsource.vs",
+                                         "../shaders/texture_lightsource.fs"));
 }
 
 // glfw: whenever the window size changed (by OS or user resize) this callback function executes
@@ -224,27 +275,27 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 
 void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
 {
-    float xpos = static_cast<float>(xposIn);
-    float ypos = static_cast<float>(yposIn);
+    auto x_pos = static_cast<float>(xposIn);
+    auto y_pos = static_cast<float>(yposIn);
 
-    if (firstMouse)
+    if (first_mouse)
     {
-        lastX = xpos;
-        lastY = ypos;
-        firstMouse = false;
+        last_x = x_pos;
+        last_y = y_pos;
+        first_mouse = false;
     }
 
-    float xoffset = xpos - lastX;
-    float yoffset = lastY - ypos; // reversed since y-coordinates go from bottom to top
+    float xoffset = x_pos - last_x;
+    float yoffset = last_y - y_pos; // reversed since y-coordinates go from bottom to top
 
-    lastX = xpos;
-    lastY = ypos;
+    last_x = x_pos;
+    last_y = y_pos;
 
-    camera.ProcessMouseMovement(xoffset, yoffset);
+    camera.on_mouse_movement(xoffset, yoffset);
 }
 
 // glfw: whenever the mouse scroll wheel scrolls, this callback is called
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
-    camera.ProcessMouseScroll(static_cast<float>(yoffset));
+    camera.on_mouse_scroll(static_cast<float>(yoffset));
 }

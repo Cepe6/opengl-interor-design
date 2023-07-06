@@ -208,7 +208,7 @@ LWO::Texture* LWOImporter::SetupNewTextureLWOB(LWO::TextureList& list,unsigned i
 			tex->mapMode = LWO::Texture::Spherical;
 		else if(strstr(s, "Cubic"))
 			tex->mapMode = LWO::Texture::Cubic;
-		else if(strstr(s, "Front"))
+		else if(strstr(s, "front"))
 			tex->mapMode = LWO::Texture::FrontProjection;
 	}
 	else

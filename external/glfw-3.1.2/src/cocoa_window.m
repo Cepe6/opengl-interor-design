@@ -766,11 +766,11 @@ static void createMenuBar(void)
     [windowMenu addItemWithTitle:@"Minimize"
                           action:@selector(performMiniaturize:)
                    keyEquivalent:@"m"];
-    [windowMenu addItemWithTitle:@"Zoom"
+    [windowMenu addItemWithTitle:@"zoom"
                           action:@selector(performZoom:)
                    keyEquivalent:@""];
     [windowMenu addItem:[NSMenuItem separatorItem]];
-    [windowMenu addItemWithTitle:@"Bring All to Front"
+    [windowMenu addItemWithTitle:@"Bring All to front"
                           action:@selector(arrangeInFront:)
                    keyEquivalent:@""];
 

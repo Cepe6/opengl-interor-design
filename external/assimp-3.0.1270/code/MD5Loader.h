@@ -160,7 +160,7 @@ protected:
 	/** Buffer to hold the loaded file */
 	char* mBuffer;
 
-	/** Size of the file */
+	/** size of the file */
 	unsigned int fileSize;
 
 	/** Current line number. For debugging purposes */

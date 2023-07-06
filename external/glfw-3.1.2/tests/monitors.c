@@ -185,7 +185,7 @@ static void test_modes(GLFWmonitor* monitor)
 
         if (current.width != mode->width || current.height != mode->height)
         {
-            printf("*** Size mismatch: %ix%i instead of %ix%i\n",
+            printf("*** size mismatch: %ix%i instead of %ix%i\n",
                    current.width, current.height,
                    mode->width, mode->height);
         }

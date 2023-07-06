@@ -307,7 +307,7 @@ protected:
 	/** Root animation container */
 	Collada::Animation mAnims;
 
-	/** Size unit: how large compared to a meter */
+	/** size unit: how large compared to a meter */
 	float mUnitSize;
 
 	/** Which is the up vector */

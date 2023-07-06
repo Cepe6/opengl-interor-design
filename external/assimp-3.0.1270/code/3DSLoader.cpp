@@ -932,7 +932,7 @@ void Discreet3DSImporter::ParseFaceChunk()
 	case Discreet3DS::CHUNK_SMOOLIST:
 		{
 		// This is the list of smoothing groups - a bitfield for every face. 
-		// Up to 32 smoothing groups assigned to a single face.
+		// up to 32 smoothing groups assigned to a single face.
 		unsigned int num = chunkSize/4, m = 0;
 		for (std::vector<D3DS::Face>::iterator i =  mMesh.mFaces.begin(); m != num;++i, ++m)	{
 			// nth bit is set for nth smoothing group

@@ -113,7 +113,7 @@ struct aiCamera
 	C_STRUCT aiVector3D mPosition;
 
 
-	/** 'Up' - vector of the camera coordinate system relative to
+	/** 'up' - vector of the camera coordinate system relative to
 	 *  the coordinate space defined by the corresponding node.
 	 *
 	 *  The 'right' vector of the camera coordinate system is

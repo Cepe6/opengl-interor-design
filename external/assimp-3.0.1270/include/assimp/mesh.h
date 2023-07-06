@@ -128,7 +128,7 @@ struct aiFace
 	//! The maximum value for this member is #AI_MAX_FACE_INDICES.
 	unsigned int mNumIndices; 
 
-	//! Pointer to the indices array. Size of the array is given in numIndices.
+	//! Pointer to the indices array. size of the array is given in numIndices.
 	unsigned int* mIndices;   
 
 #ifdef __cplusplus
@@ -543,7 +543,7 @@ struct aiMesh
 	C_STRUCT aiVector3D* mTextureCoords[AI_MAX_NUMBER_OF_TEXTURECOORDS];
 
 	/** Specifies the number of components for a given UV channel.
-	* Up to three channels are supported (UVW, for accessing volume
+	* up to three channels are supported (UVW, for accessing volume
 	* or cube maps). If the value is 2 for a given channel n, the
 	* component p.z of mTextureCoords[n][p] is set to 0.0f.
 	* If the value is 1 for a given channel, p.y is set to 0.0f, too.

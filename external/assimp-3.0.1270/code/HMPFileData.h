@@ -70,9 +70,9 @@ struct Header_HMP5
 	float	scale_origin[3];
 	float	boundingradius;
 	
-	//! Size of one triangle in x direction
+	//! size of one triangle in x direction
 	float	ftrisize_x;		
-	//! Size of one triangle in y direction
+	//! size of one triangle in y direction
 	float	ftrisize_y;		
 	//! Number of vertices in x direction
 	float	fnumverts_x;	

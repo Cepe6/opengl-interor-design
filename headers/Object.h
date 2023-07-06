@@ -4,8 +4,6 @@
 #include "Shader.h"
 #include "stb_image.h"
 
-#include <GLFW/glfw3.h>
-
 class Object {
 private:
 	unsigned int VBO, VAO, EBO;
@@ -14,18 +12,23 @@ private:
 
 	const char* texture_name;
 
-	float rotateAngle;
+	float rotate_angle;
 
-	void loadTexture();
+	void load_texture();
 	void light();
 
 public:
-	glm::vec3 scaleVec;
-	glm::vec3 rotateVec;
-	glm::vec3 translateVec;
+	glm::vec3 scale_vec;
+	glm::vec3 rotate_vec;
+	glm::vec3 translate_vec;
 	std::string name;
 
-	Object(std::string name, glm::vec3 scaleVec, glm::vec3 rotateVec, float rotateAngle, glm::vec3 transalteVec, const char* texture_name);
+	Object(std::string name,
+           glm::vec3 scale_vec,
+           glm::vec3 rotate_vec,
+           float rotate_angle,
+           glm::vec3 translate_vec,
+           const char* texture_name);
 
 	void draw();
 	void free();

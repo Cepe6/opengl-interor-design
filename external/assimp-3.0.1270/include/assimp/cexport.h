@@ -177,7 +177,7 @@ ASSIMP_API aiReturn aiExportSceneEx( const C_STRUCT aiScene* pScene,
 */
 struct aiExportDataBlob 
 {
-	/// Size of the data in bytes
+	/// size of the data in bytes
 	size_t size;
 
 	/// The data. 

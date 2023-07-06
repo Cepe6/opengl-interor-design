@@ -303,7 +303,7 @@ protected:
 	/** File buffer  */
 	BE_NCONST unsigned char* mBuffer;
 
-	/** Size of the file, in bytes */
+	/** size of the file, in bytes */
 	unsigned int fileSize;
 
 	/** Current file name */

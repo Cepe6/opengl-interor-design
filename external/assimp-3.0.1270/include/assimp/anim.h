@@ -313,7 +313,7 @@ struct aiMeshAnim
 	 *  of meshes with similar animation setup)*/
 	C_STRUCT aiString mName;
 
-	/** Size of the #mKeys array. Must be 1, at least. */
+	/** size of the #mKeys array. Must be 1, at least. */
 	unsigned int mNumKeys;
 
 	/** Key frames of the animation. May not be NULL. */

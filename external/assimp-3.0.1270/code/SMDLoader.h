@@ -377,7 +377,7 @@ private:
 	*/
 	aiScene* pScene;
 
-	/** Size of the input file in bytes
+	/** size of the input file in bytes
 	 */
 	unsigned int iFileSize;
 

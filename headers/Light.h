@@ -1,7 +1,6 @@
 #ifndef LIGHT_H
 #define LIGHT_H
 
-#include <GLFW/glfw3.h>
 #include "stb_image.h"
 
 #include "Shader.h"
@@ -14,15 +13,20 @@ private:
 
 	const char* texture_name;
 
-	float rotateAngle;
+	float rotate_angle;
 
 public:
-	glm::vec3 scaleVec;
-	glm::vec3 rotateVec;
-	glm::vec3 translateVec;
+	glm::vec3 scale_vec;
+	glm::vec3 rotate_vec;
+	glm::vec3 translate_vec;
 	std::string name;
 
-	Light(std::string name, glm::vec3 scaleVec, glm::vec3 rotateVec, float rotateAngle, glm::vec3 transalteVec, const char* texture_name);
+	Light(std::string name,
+          glm::vec3 scale_vec,
+          glm::vec3 rotate_vec,
+          float rotate_angle,
+          glm::vec3 translate_vec, 
+          const char* texture_name);
 
 	void draw();
 };
