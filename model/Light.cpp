@@ -60,16 +60,16 @@ unsigned int lamp_indices[] = {
 Light::Light(std::string name,
              glm::vec3 scale_vec,
              glm::vec3 rotate_vec,
+             glm::vec3 default_ambient,
              float rotate_angle,
-             glm::vec3 translate_vec,
-             const char* texture_name) {
+             glm::vec3 translate_vec) {
     this->scale_vec = scale_vec;
     this->rotate_vec = rotate_vec;
     this->rotate_angle = rotate_angle;
     this->translate_vec = translate_vec;
+    this->default_ambient = default_ambient * 0.5f;
     this->name = std::move(name);
     this->shader = ShaderManager::get_shader_by_name("light");
-    this->texture_name = texture_name;
 
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
@@ -80,7 +80,7 @@ Light::Light(std::string name,
     glBufferData(GL_ARRAY_BUFFER, sizeof(lamp_vertices), lamp_vertices, GL_STATIC_DRAW);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(lamp_indices), lamp_indices, GL_STATIC_DRAW);
 
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*) nullptr);
     glEnableVertexAttribArray(0);
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -92,15 +92,23 @@ Light::Light(std::string name,
     glm::mat4 projection = glm::mat4(1.0f);
     projection = glm::perspective(glm::radians(45.0f), 1280.0f / 720.0f, 0.1f, 100.0f);
 
-    PointLightManager::add_point_light(new PointLight({true, translate_vec, glm::vec3(5.05f, 5.05f, 5.05f),
-                                                       glm::vec3(0.8f, 0.8f, 0.8f),
-                                                       glm::vec3(1.0f), 1.0f, 0.35, 0.44}));
+    PointLightManager::add_point_light(new PointLight({this->name,
+                                                       true,
+                                                       translate_vec,
+                                                       this->default_ambient,
+                                                       this->default_ambient * 2.0f,
+                                                       glm::vec3(1.0f),
+                                                       1.0f,
+                                                       0.35,
+                                                       0.44}));
 
     shader->setMat4("projection", projection);
 }
 
 void Light::draw() {
     shader->use();
+    shader->setVec3("objectColor", 1.0f, 0.5f, 1.0f);
+    shader->setVec3("lightColor",  1.0f, 0.5f, 1.0f);
 
     // make sure to initialize matrix to identity matrix first
     glm::mat4 model = glm::mat4(1.0f);

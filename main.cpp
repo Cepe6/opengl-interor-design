@@ -19,7 +19,8 @@ Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 float last_x = SCREEN_WIDTH / 2.0f;
 float last_y = SCREEN_HEIGHT / 2.0f;
 bool first_mouse = true;
-
+bool space_pressed_last_frame = false;
+bool window_light_keys_pressed_last_frame[4] = {false, false, false, false};
 
 float delta_time = 0.0f; // Time between current frame and last frame
 float last_frame = 0.0f;  // Time of last frame
@@ -98,7 +99,7 @@ void render_loop() {
         calculate_delta_time();
         process_input();
 
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        glClearColor(0.0f, 1.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         glm::mat4 projection = glm::perspective(glm::radians(camera.zoom), (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.1f, 100.0f);
@@ -133,8 +134,44 @@ void process_input() {
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
         camera.on_keyboard_input(RIGHT, delta_time, glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS);
 
-    if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
-        PointLight* light = PointLightManager::get_point_lights()[1];
+    // Sunrise window color
+    if(glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS) {
+        window_light_keys_pressed_last_frame[0] = true;
+    } else if (glfwGetKey(window, GLFW_KEY_1) == GLFW_RELEASE && window_light_keys_pressed_last_frame[0]) {
+        window_light_keys_pressed_last_frame[0] = false;
+        PointLight* light = PointLightManager::get_point_light_by_name("window_light");
+        light->ambient = glm::vec3(5.0f, 3.96f, 2.43f) * 0.5f;
+    }
+    // Midday window color
+    if(glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS) {
+        window_light_keys_pressed_last_frame[1] = true;
+    } else if (glfwGetKey(window, GLFW_KEY_2) == GLFW_RELEASE && window_light_keys_pressed_last_frame[1]) {
+        window_light_keys_pressed_last_frame[1] = false;
+        PointLight* light = PointLightManager::get_point_light_by_name("window_light");
+        light->ambient = glm::vec3(5.0f, 5.0f, 2.19f) * 0.5f;
+    }
+    // Sunset window color
+    if(glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS) {
+        window_light_keys_pressed_last_frame[2] = true;
+    } else if (glfwGetKey(window, GLFW_KEY_3) == GLFW_RELEASE && window_light_keys_pressed_last_frame[2]) {
+        window_light_keys_pressed_last_frame[2] = false;
+        PointLight* light = PointLightManager::get_point_light_by_name("window_light");
+        light->ambient = glm::vec3(4.9f, 4.19f, 3.23f) * 0.5f;
+    }
+    // Full-moon window color
+    if(glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS) {
+        window_light_keys_pressed_last_frame[3] = true;
+    } else if (glfwGetKey(window, GLFW_KEY_4) == GLFW_RELEASE && window_light_keys_pressed_last_frame[3]) {
+        window_light_keys_pressed_last_frame[3] = false;
+        PointLight* light = PointLightManager::get_point_light_by_name("window_light");
+        light->ambient = glm::vec3(1.21f, 1.49f, 2.31f) * 0.5f;
+    }
+
+    if(glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
+        space_pressed_last_frame = true;
+    } else if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_RELEASE && space_pressed_last_frame) {
+        space_pressed_last_frame = false;
+        PointLight* light = PointLightManager::get_point_light_by_name("screen_light");
         light->on = !light->on;
     }
 }
@@ -231,22 +268,22 @@ void load_objects() {
     room_objects.push_back(wall4);
     room_objects.push_back(ceiling);
 
-    auto* lamp = new Light("lamp",
+    auto* screen_light = new Light("window_light",
                            glm::vec3(0.2f, 0.2f, 0.2f),
                            glm::vec3(0.0f, 0.1f, 0.0f),
+                           glm::vec3(1.21f, 1.49f, 2.31f),
                            0.0f,
-                           glm::vec3(0.0f) + glm::vec3(-3.0f, 0.5f, -10.0f),
-                           "../resources/ceiling.jpg");
+                           glm::vec3(0.0f) + glm::vec3(-3.0f, 0.5f, -7.5f));
 
-    auto* lamp2 = new Light("lamp2",
+    auto* window_light = new Light("screen_light",
                             glm::vec3(0.2f, 0.2f, 0.2f),
                             glm::vec3(0.0f, 0.1f, 0.0f),
+                            glm::vec3(2.5f, 3.5f, 5.0f),
                             0.0f,
-                            glm::vec3(0.0f) + glm::vec3(10.0f, 0.8f, 0.0f),
-                            "../resources/ceiling.jpg");
+                            glm::vec3(0.0f) + glm::vec3(7.5f, 0.8f, 0.0f));
 
-    light_objects.push_back(lamp);
-    light_objects.push_back(lamp2);
+    light_objects.push_back(screen_light);
+    light_objects.push_back(window_light);
 }
 
 void calculate_delta_time()
